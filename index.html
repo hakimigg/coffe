@@ -873,12 +873,84 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   var navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(function(link) {
-    link.addEventListener('click', function() {
+    link.addEventListener('click', function(e) {
+      var href = link.getAttribute('href');
+      if(href && href.startsWith('#')) {
+        var targetId = href.slice(1);
+        var target = document.getElementById(targetId);
+        if(target) {
+          e.preventDefault();
+          var startY = window.scrollY;
+          var endY = target.getBoundingClientRect().top + window.scrollY;
+          var distance = endY - startY;
+          var duration = 500;
+          var startTime = null;
+          function animation(currentTime) {
+            if (!startTime) startTime = currentTime;
+            var timeElapsed = currentTime - startTime;
+            var progress = Math.min(timeElapsed / duration, 1);
+            window.scrollTo(0, startY + distance * (progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress));
+            if (progress < 1) {
+              requestAnimationFrame(animation);
+            }
+          }
+          requestAnimationFrame(animation);
+        }
+      }
       if(window.innerWidth <= 768) {
         navMenu.classList.remove('active');
       }
     });
   });
+
+  var exploreMenuBtn = document.querySelector('.hero-content .btn-primary');
+  if(exploreMenuBtn) {
+    exploreMenuBtn.addEventListener('click', function(e) {
+      var target = document.getElementById('menu');
+      if(target) {
+        e.preventDefault();
+        var startY = window.scrollY;
+        var endY = target.getBoundingClientRect().top + window.scrollY;
+        var distance = endY - startY;
+        var duration = 500;
+        var startTime = null;
+        function animation(currentTime) {
+          if (!startTime) startTime = currentTime;
+          var timeElapsed = currentTime - startTime;
+          var progress = Math.min(timeElapsed / duration, 1);
+          window.scrollTo(0, startY + distance * (progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress));
+          if (progress < 1) {
+            requestAnimationFrame(animation);
+          }
+        }
+        requestAnimationFrame(animation);
+      }
+    });
+  }
+  var ourStoryBtn = document.querySelector('.hero-content .btn-outline');
+  if(ourStoryBtn) {
+    ourStoryBtn.addEventListener('click', function(e) {
+      var target = document.getElementById('about');
+      if(target) {
+        e.preventDefault();
+        var startY = window.scrollY;
+        var endY = target.getBoundingClientRect().top + window.scrollY;
+        var distance = endY - startY;
+        var duration = 500;
+        var startTime = null;
+        function animation(currentTime) {
+          if (!startTime) startTime = currentTime;
+          var timeElapsed = currentTime - startTime;
+          var progress = Math.min(timeElapsed / duration, 1);
+          window.scrollTo(0, startY + distance * (progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress));
+          if (progress < 1) {
+            requestAnimationFrame(animation);
+          }
+        }
+        requestAnimationFrame(animation);
+      }
+    });
+  }
 
   function openOrderModal() {
     document.getElementById('orderModal').style.display = 'flex';
