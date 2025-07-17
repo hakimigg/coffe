@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brewed Bliss - Coffee Shop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+/* Coffee Shop Design System - All colors in HSL */
+:root {
+  /* Coffee-inspired color palette */
+  --background: 45 15% 97%;
+  --foreground: 25 25% 15%;
+  --card: 45 20% 95%;
+  --card-foreground: 25 25% 15%;
+  --popover: 45 20% 95%;
+  --popover-foreground: 25 25% 15%;
+  --primary: 25 60% 25%;
+  --primary-foreground: 45 25% 95%;
+  --secondary: 40 25% 88%;
+  --secondary-foreground: 25 40% 20%;
+  --muted: 40 20% 90%;
+  --muted-foreground: 25 15% 50%;
+  --accent: 45 75% 60%;
+  --accent-foreground: 25 40% 15%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 40 20% 85%;
+  --input: 40 20% 88%;
+  --ring: 25 60% 25%;
+  --radius: 0.5rem;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(25 40% 35%));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px hsl(var(--primary) / 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+}
+
+.btn-outline:hover {
+  background: hsl(var(--background));
+  border-color: hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* Navigation */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: hsl(var(--background) / 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid hsl(var(--border));
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: hsl(var(--primary));
+}
+
+.nav-logo i {
+  font-size: 2rem;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: hsl(var(--primary));
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: hsl(var(--foreground));
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+              url('assets/hero-coffee-shop-DUGSZryn.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.gradient-text {
+  display: block;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(45 60% 70%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #e5e7eb;
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  animation: scaleIn 0.6s ease-out 0.4s both;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 2s infinite;
+}
+
+/* Section Styles */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: hsl(var(--primary));
+  margin-bottom: 1rem;
+}
+
+.section-header p {
+  font-size: 1.125rem;
+  color: hsl(var(--muted-foreground));
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+/* About Section */
+.about {
+  padding: 5rem 0;
+  background: hsl(var(--background));
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.about-text h3 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: hsl(var(--primary));
+  margin-bottom: 1rem;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: hsl(var(--accent));
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.about-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+/* Menu Section */
+.menu {
+  padding: 5rem 0;
+  background: hsl(var(--background));
+}
+
+.menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  background: hsl(var(--muted));
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: hsl(var(--muted-foreground));
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.menu-content {
+  display: none;
+}
+
+.menu-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.menu-item {
+  background: hsl(var(--card) / 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.menu-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px hsl(var(--primary) / 0.15);
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.menu-header h3 {
+  font-size: 1.125rem;
+  color: hsl(var(--primary));
+}
+
+.price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: hsl(var(--accent));
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, hsl(var(--accent)), hsl(45 60% 70%));
+  color: hsl(var(--accent-foreground));
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.menu-item p {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Gallery Section */
+.gallery {
+  padding: 5rem 0;
+  background: hsl(var(--secondary));
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: var(--radius);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Contact Section */
+.contact {
+  padding: 5rem 0;
+  background: hsl(var(--background));
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-item i {
+  font-size: 1.5rem;
+  color: hsl(var(--accent));
+  margin-top: 0.25rem;
+}
+
+.contact-item h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: hsl(var(--primary));
+  margin-bottom: 0.5rem;
+}
+
+.contact-item p {
+  color: hsl(var(--muted-foreground));
+}
+
+.contact-form {
+  background: hsl(var(--card));
+  padding: 2rem;
+  border-radius: var(--radius);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+}
+
+/* Footer */
+.footer {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 3rem 0 1rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.footer-logo i {
+  font-size: 2rem;
+}
+
+.footer-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section ul li a {
+  color: hsl(var(--primary-foreground) / 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: hsl(var(--primary-foreground));
+}
+
+.footer-section ul li i {
+  margin-right: 0.5rem;
+  color: hsl(var(--accent));
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  border-radius: 50%;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid hsl(var(--primary) / 0.2);
+  color: hsl(var(--primary-foreground) / 0.8);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-menu {
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    background: hsl(var(--background));
+    flex-direction: column;
+    padding: 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .menu-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .hero-content {
+    padding: 0 0.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+} 
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-logo" style="color: #7c4a03;">
+      <i class="fas fa-mug-hot"></i>
+      <span>Brewed Bliss</span>
+    </div>
+    <div class="nav-menu" id="nav-menu" style="flex: 1; justify-content: center;">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#menu" class="nav-link">Menu</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <button class="btn btn-primary order-now-btn" style="background: #7c4a03; color: #fff; border-radius: 1.5rem; font-weight: bold; padding: 0.75rem 2rem;">Order Now</button>
+    <div class="nav-toggle" id="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section id="home" class="hero">
+  <div class="hero-background" style="background-image: url('assets/hero-coffee-shop-DUGSZryn.jpg'); position: absolute; inset: 0;">
+    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.35);"></div>
+  </div>
+  <div class="hero-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh;">
+    <h1 class="hero-title" style="font-size: 3.5rem; font-weight: bold; color: #fff; margin-bottom: 0.5rem; line-height: 1.1; text-align: center;">
+      Welcome to<br>Brewed Bliss
+    </h1>
+    <p class="hero-subtitle" style="color: #fff; font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem auto; text-align: center; font-weight: 400;">
+      Where passion meets perfection in every cup. Experience the finest coffee crafted with love and expertise, served in an atmosphere designed for true coffee connoisseurs.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 2rem;">
+      <button class="btn btn-primary btn-large" style="background: #7c4a03; color: #fff; font-size: 1rem; border-radius: 0.75rem; min-width: 140px; padding: 0.75rem 2.25rem; height: 48px;" onclick="scrollToSection('menu')">Explore Menu</button>
+      <button class="btn btn-outline btn-large" style="color: #fff; border: 2px solid #fff; font-size: 1rem; border-radius: 0.75rem; background: transparent; min-width: 140px; padding: 0.75rem 2.25rem; height: 48px;" onclick="scrollToSection('about')">Our Story</button>
+    </div>
+    <div class="scroll-indicator" style="margin-top: 0;">
+      <i class="fas fa-chevron-down" style="color: #fff; font-size: 1.5rem;"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Story</h2>
+      <p>Founded in 2015, Brewed Bliss has been serving exceptional coffee experiences to our community. We believe that great coffee is more than just a beverage – it's a moment of joy, a connection between people, and a craft that deserves respect and passion.</p>
+    </div>
+    <div class="about-content">
+      <div class="about-image">
+        <img src="assets/latte-art-BZih_Ibu.jpg" alt="Latte Art">
+      </div>
+      <div class="about-features">
+        <div class="about-feature">
+          <i class="fas fa-seedling"></i>
+          <h3>Premium Beans</h3>
+          <p>Sourced from the finest coffee farms around the world</p>
+        </div>
+        <div class="about-feature">
+          <i class="fas fa-fire"></i>
+          <h3>Expert Roasting</h3>
+          <p>Our master roasters ensure perfect flavor profiles</p>
+        </div>
+        <div class="about-feature">
+          <i class="fas fa-heart"></i>
+          <h3>Made with Love</h3>
+          <p>Every cup is crafted with passion and attention to detail</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU SECTION -->
+<section id="menu" class="menu">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Menu</h2>
+      <p>Discover our carefully curated selection of coffee, pastries, and light meals</p>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="showMenuTab('coffee')">Coffee</button>
+      <button class="tab-btn" onclick="showMenuTab('pastries')">Pastries</button>
+      <button class="tab-btn" onclick="showMenuTab('food')">Food</button>
+    </div>
+    <!-- Coffee Menu -->
+    <div id="coffee-menu" class="menu-content active">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Espresso</h3>
+            <span class="price">$3.50</span>
+          </div>
+          <span class="badge">Popular</span>
+          <p>Rich, bold shot of perfectly extracted coffee</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Cappuccino</h3>
+            <span class="price">$4.25</span>
+          </div>
+          <p>Espresso with steamed milk and foam art</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Latte</h3>
+            <span class="price">$4.50</span>
+          </div>
+          <p>Smooth espresso with steamed milk</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Americano</h3>
+            <span class="price">$3.75</span>
+          </div>
+          <p>Espresso with hot water for a clean taste</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Mocha</h3>
+            <span class="price">$5.00</span>
+          </div>
+          <p>Espresso with chocolate and steamed milk</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Cold Brew</h3>
+            <span class="price">$4.00</span>
+          </div>
+          <span class="badge">Popular</span>
+          <p>Smooth, refreshing cold-steeped coffee</p>
+        </div>
+      </div>
+    </div>
+    <!-- Pastries Menu -->
+    <div id="pastries-menu" class="menu-content">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Croissant</h3>
+            <span class="price">$3.25</span>
+          </div>
+          <span class="badge">Popular</span>
+          <p>Buttery, flaky French pastry</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Chocolate Muffin</h3>
+            <span class="price">$3.75</span>
+          </div>
+          <span class="badge">Popular</span>
+          <p>Rich chocolate muffin with chocolate chips</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Blueberry Scone</h3>
+            <span class="price">$3.50</span>
+          </div>
+          <p>Fresh blueberries in a tender scone</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Danish Pastry</h3>
+            <span class="price">$4.00</span>
+          </div>
+          <p>Flaky pastry with sweet filling</p>
+        </div>
+      </div>
+    </div>
+    <!-- Food Menu -->
+    <div id="food-menu" class="menu-content">
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Avocado Toast</h3>
+            <span class="price">$8.50</span>
+          </div>
+          <span class="badge">Popular</span>
+          <p>Fresh avocado on artisan bread with seasoning</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Breakfast Sandwich</h3>
+            <span class="price">$7.25</span>
+          </div>
+          <p>Egg, cheese, and choice of meat on a fresh bun</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Quinoa Bowl</h3>
+            <span class="price">$9.75</span>
+          </div>
+          <p>Nutritious quinoa with fresh vegetables</p>
+        </div>
+        <div class="menu-item">
+          <div class="menu-header">
+            <h3>Soup of the Day</h3>
+            <span class="price">$6.50</span>
+          </div>
+          <p>Ask our staff about today's homemade soup</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="gallery" style="background: #fcf8f3; padding-bottom: 3rem;">
+  <div class="container">
+    <div class="section-header">
+      <h2 style="color: #7c4a03; font-size: 2.8rem; font-weight: bold; margin-bottom: 0.5rem;">Gallery</h2>
+      <p style="color: #a67c52; font-size: 1.2rem; margin-bottom: 2.5rem;">Take a glimpse into our coffee world</p>
+    </div>
+    <div class="gallery-grid" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 3rem;">
+      <img src="assets/hero-coffee-shop-DUGSZryn.jpg" alt="Coffee Shop Interior" style="width: 270px; height: 270px; object-fit: cover; border-radius: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+      <img src="assets/latte-art-BZih_Ibu.jpg" alt="Latte Art" style="width: 270px; height: 270px; object-fit: cover; border-radius: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+      <img src="assets/coffee-beans-CNR07Kz0.jpg" alt="Coffee Beans" style="width: 270px; height: 270px; object-fit: cover; border-radius: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+      <img src="assets/pastries-CDmHG77v.jpg" alt="Pastries" style="width: 270px; height: 270px; object-fit: cover; border-radius: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+    </div>
+  </div>
+</section>
+
+<!-- STATS SECTION -->
+<section class="gallery-stats-section" style="background: #fcf8f3; padding-bottom: 4rem;">
+  <div class="container" style="display: flex; justify-content: center; gap: 2.5rem;">
+    <div class="stat-block" style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2.5rem 2.5rem 2rem 2.5rem; min-width: 260px; text-align: center;">
+      <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #7c4a03; margin-bottom: 0.5rem;">10K+</div>
+      <div class="stat-label" style="font-size: 1.1rem; color: #a67c52;">Happy Customers</div>
+    </div>
+    <div class="stat-block" style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2.5rem 2.5rem 2rem 2.5rem; min-width: 260px; text-align: center;">
+      <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #7c4a03; margin-bottom: 0.5rem;">50+</div>
+      <div class="stat-label" style="font-size: 1.1rem; color: #a67c52;">Coffee Varieties</div>
+    </div>
+    <div class="stat-block" style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2.5rem 2.5rem 2rem 2.5rem; min-width: 260px; text-align: center;">
+      <div class="stat-number" style="font-size: 2.5rem; font-weight: bold; color: #7c4a03; margin-bottom: 0.5rem;">8</div>
+      <div class="stat-label" style="font-size: 1.1rem; color: #a67c52;">Years of Excellence</div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT/CONTACT SECTION -->
+<section id="contact" class="contact" style="background: #f5efe6; padding: 4rem 0;">
+  <div class="container" style="display: flex; gap: 2.5rem; align-items: flex-start; justify-content: center;">
+    <div style="flex: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2rem 2rem 1.5rem 2rem; min-width: 240px;">
+        <div style="background: #7c4a03; color: #fff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i></div>
+        <div style="font-weight: bold; color: #7c4a03; font-size: 1.15rem; margin-bottom: 0.5rem;">Location</div>
+        <div style="color: #7c4a03; font-size: 1rem;">123 Coffee Street<br>Downtown District, NY 10001</div>
+      </div>
+      <div style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2rem 2rem 1.5rem 2rem; min-width: 240px;">
+        <div style="background: #7c4a03; color: #fff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-phone"></i></div>
+        <div style="font-weight: bold; color: #7c4a03; font-size: 1.15rem; margin-bottom: 0.5rem;">Phone</div>
+        <div style="color: #7c4a03; font-size: 1rem;">(555) 123-4567<br>Call for reservations</div>
+      </div>
+      <div style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2rem 2rem 1.5rem 2rem; min-width: 240px;">
+        <div style="background: #7c4a03; color: #fff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-envelope"></i></div>
+        <div style="font-weight: bold; color: #7c4a03; font-size: 1.15rem; margin-bottom: 0.5rem;">Email</div>
+        <div style="color: #7c4a03; font-size: 1rem;">hello@brewedbliss.com<br>info@brewedbliss.com</div>
+      </div>
+      <div style="background: #fff; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2rem 2rem 1.5rem 2rem; min-width: 240px;">
+        <div style="background: #7c4a03; color: #fff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 0.75rem; font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-clock"></i></div>
+        <div style="font-weight: bold; color: #7c4a03; font-size: 1.15rem; margin-bottom: 0.5rem;">Hours</div>
+        <div style="color: #7c4a03; font-size: 1rem;">Mon-Fri: 7AM - 7PM<br>Sat-Sun: 8AM - 8PM</div>
+      </div>
+    </div>
+    <div style="flex: 1; background: #7c4a03; border-radius: 1.5rem; box-shadow: 0 2px 16px rgba(0,0,0,0.06); padding: 2.5rem 2rem 2rem 2rem; min-width: 320px; display: flex; flex-direction: column; align-items: center;">
+      <div style="background: #a67c52; color: #fff; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 1rem; font-size: 2rem; margin-bottom: 1.5rem;"><i class="fas fa-mug-hot"></i></div>
+      <div style="font-size: 1.45rem; font-weight: bold; color: #fff; text-align: center; margin-bottom: 1rem;">Ready for the perfect cup?</div>
+      <div style="color: #fff; font-size: 1.05rem; text-align: center; margin-bottom: 2.2rem;">Join us for an exceptional coffee experience that will awaken your senses.</div>
+      <button class="btn btn-primary" style="width: 100%; background: #6a3a0a; color: #fff; font-weight: bold; font-size: 1.1rem; border-radius: 0.75rem; margin-bottom: 1rem; height: 48px;">Order Online</button>
+      <button class="btn btn-outline" style="width: 100%; color: #fff; border: 2px solid #fff; font-size: 1.1rem; border-radius: 0.75rem; background: transparent; height: 48px; opacity: 0.5; cursor: not-allowed;" disabled>Make Reservation</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER SECTION -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="footer-logo">
+          <i class="fas fa-coffee"></i>
+          <span>Brewed Bliss</span>
+        </div>
+        <p>Where passion meets perfection in every cup. Experience the finest coffee crafted with love.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Services</h3>
+        <ul>
+          <li>Dine In</li>
+          <li>Takeaway</li>
+          <li>Catering</li>
+          <li>Events</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Brewed Bliss. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+    <script>
+// Mobile Navigation Toggle
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    
+    // Change icon
+    const icon = navToggle.querySelector('i');
+    if (navMenu.classList.contains('active')) {
+        icon.className = 'fas fa-times';
+    } else {
+        icon.className = 'fas fa-bars';
+    }
+});
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        const icon = navToggle.querySelector('i');
+        icon.className = 'fas fa-bars';
+    });
+});
+
+// Smooth scroll to section with 0.5s duration
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (!element) return;
+  const startY = window.scrollY;
+  const endY = element.getBoundingClientRect().top + window.scrollY;
+  const distance = endY - startY;
+  const duration = 500;
+  let startTime = null;
+
+  function animation(currentTime) {
+    if (!startTime) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const progress = Math.min(timeElapsed / duration, 1);
+    window.scrollTo(0, startY + distance * easeInOutQuad(progress));
+    if (progress < 1) {
+      requestAnimationFrame(animation);
+    }
+  }
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+  requestAnimationFrame(animation);
+}
+
+// Make all anchor links with href starting with # use smooth scroll
+window.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').slice(1);
+      if (document.getElementById(targetId)) {
+        e.preventDefault();
+        scrollToSection(targetId);
+      }
+    });
+  });
+});
+
+// Menu Tab Functionality
+function showMenuTab(tabName) {
+    // Hide all menu contents
+    const menuContents = document.querySelectorAll('.menu-content');
+    menuContents.forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remove active class from all tab buttons
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Show selected menu content
+    const selectedContent = document.getElementById(tabName + '-menu');
+    if (selectedContent) {
+        selectedContent.classList.add('active');
+    }
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+}
+
+// Contact Form Handling
+const contactForm = document.getElementById('contact-form');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = new FormData(this);
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const subject = formData.get('subject');
+    const message = formData.get('message');
+    
+    // Simple validation
+    if (!name || !email || !subject || !message) {
+        showNotification('Please fill in all fields', 'error');
+        return;
+    }
+    
+    if (!isValidEmail(email)) {
+        showNotification('Please enter a valid email address', 'error');
+        return;
+    }
+    
+    // Simulate form submission
+    showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+    
+    // Reset form
+    this.reset();
+});
+
+// Email validation
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#10b981' : '#ef4444'};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        max-width: 300px;
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 5 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 5000);
+}
+
+// Intersection Observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.section-header, .about-content, .menu-grid, .gallery-grid, .contact-content');
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Navbar background on scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.background = 'hsl(var(--background) / 0.98)';
+        navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+    } else {
+        navbar.style.background = 'hsl(var(--background) / 0.95)';
+        navbar.style.boxShadow = 'none';
+    }
+});
+
+// Gallery image click to enlarge (optional)
+document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.addEventListener('click', () => {
+        // Create modal
+        const modal = document.createElement('div');
+        modal.className = 'image-modal';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <img src="${img.src}" alt="${img.alt}">
+            </div>
+        `;
+        
+        // Add styles
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        const modalContent = modal.querySelector('.modal-content');
+        modalContent.style.cssText = `
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        `;
+        
+        const modalImg = modal.querySelector('img');
+        modalImg.style.cssText = `
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        `;
+        
+        const closeBtn = modal.querySelector('.close-modal');
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        `;
+        
+        // Add to page
+        document.body.appendChild(modal);
+        
+        // Animate in
+        setTimeout(() => {
+            modal.style.opacity = '1';
+        }, 10);
+        
+        // Close functionality
+        const closeModal = () => {
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                document.body.removeChild(modal);
+            }, 300);
+        };
+        
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+    });
+});
+
+// Add loading animation
+window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+});
+
+// Counter animation for stats
+function animateCounter(element, target, duration = 2000) {
+    let start = 0;
+    const increment = target / (duration / 16);
+    
+    const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+            element.textContent = target;
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(start);
+        }
+    }, 16);
+}
+
+// Animate stats when they come into view
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const statNumber = entry.target.querySelector('.stat-number');
+            const target = parseInt(statNumber.textContent);
+            animateCounter(statNumber, target);
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat').forEach(stat => {
+    statsObserver.observe(stat);
+});
+
+// Add some interactive hover effects
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        item.style.transform = 'translateY(-8px) scale(1.02)';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        item.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// Parallax effect for hero section (subtle)
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroBackground = document.querySelector('.hero-background');
+    if (heroBackground) {
+        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+});
+
+console.log('Brewed Bliss Coffee Shop - JavaScript loaded successfully! ☕');
+    </script>
+</body>
+</html>
